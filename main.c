@@ -33,11 +33,12 @@ void insertmatriks(int vertex)
     }
 
     printf("\n");
+    printf("Bentuk dalam matriks : \n");
     for(int i=1; i<=vertex; i++){
         for(int j=1; j<=vertex; j++){
-			printf(" %d", array[i][j]);
+			printf("  %d", array[i][j]);
         }
-		printf("\n");
+	printf("\n");
     }
 }
 
@@ -73,15 +74,15 @@ void kruskal(int vertex){
   		{
   			if(uji[i] == i)
    			{
-    			for(int j=1; j<=vertex; j++)
-    			{
-     				if(array[i][j]<min && array[i][j]!=0)
-     				{
-     					min = array[i][j];
-     					a=i;
-     					b=j;
-     				}
-    			} 
+    				for(int j=1; j<=vertex; j++)
+    				{
+     					if(array[i][j]<min && array[i][j]!=0)
+     					{
+     						min = array[i][j];
+     						a=i;
+     						b=j;
+     					}
+    				} 
    			}
   		}
   		array[a][b] = 0;
