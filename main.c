@@ -4,11 +4,71 @@
 void header();
 void prim();
 void kruskal();
-void checkifcircuit();
+int checkifcircuit(int array[50][50], int vertex);
 void insertmatriks();
 void checkifconnected();
 
 int array[50][50],n, i, j, hubung;
+
+/* Utilities Function START*/
+
+void checkifconnected()
+{
+    if (hubung == 1)
+    {
+        printf("\nMatriks ini termasuk Graph Terhubung");
+    }
+    else
+    {
+        printf("\nMatriks ini termasuk Graph Tidak Terhubung");
+    }
+}
+
+int checkifcircuit(int array[50][50], int vertex)
+{
+    int degreeIn = 0, degreeOut = 0, i,j, count;
+    int arrayDegreeIn[50];
+    int arrayDegreeOut[50];
+    int temp, countercircuit;
+
+    for(i=0;i<vertex;i++){
+        for (j = 0; j < vertex; j++){
+            if (array[i][j] != 0)
+            {
+                degreeOut++;
+            }
+            if (array[j][i] != 0){
+                degreeIn++;
+            }
+        }
+        arrayDegreeIn[count] = degreeIn;
+        arrayDegreeOut[count] = degreeOut;
+        degreeOut = 0;
+        degreeIn = 0;
+        count++;
+    }
+    for(i=0;i<vertex;i++){
+       temp = arrayDegreeIn[i] - arrayDegreeOut[i];
+       if(temp != 0){
+           countercircuit++;
+       }
+       if(countercircuit > 2){
+           return 0;
+       }
+    }
+    return 1;
+}
+
+void header()
+{
+    printf("+++++++++++++++++++++++++++++++++");
+    printf("PROGRAM ALGORIMA PRIM DAN KRUSKAL");
+    printf("+++++++++++++++++++++++++++++++++");
+}
+/* Utilities Function END*/
+
+
+/* Main and Menu Function */
 
 void main(){
     int pilihan;
@@ -45,12 +105,6 @@ void main(){
     }
 }
 
-void header(){
-    printf("+++++++++++++++++++++++++++++++++");
-    printf("PROGRAM ALGORIMA PRIM DAN KRUSKAL");
-    printf("+++++++++++++++++++++++++++++++++");
-}
-
 void insertmatriks()
 {
 
@@ -83,15 +137,4 @@ void insertmatriks()
 		printf("\n");
     }
 
-}
-
-void checkconnected()
-{
-
-    if(hubung == 1){
-        printf("\nMatriks ini termasuk Graph Terhubung");
-    }
-    else{
-        printf("\nMatriks ini termasuk Graph Tidak Terhubung");
-    }
 }
