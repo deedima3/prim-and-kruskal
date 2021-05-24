@@ -7,11 +7,13 @@ int prim();
 void kruskal(int vertex);
 void spanningTree();
 int checkifcircuit(int array[50][50], int vertex);
-void checkifconnected();
+int checkifconnected(int startnumber);
+void checkifconnectedrecur(int startnumber);
 
 int array[50][50], hubung;
 int vertex; 
 int spanning[50][50];
+int connect[50];
 
 /* Utilities Function START*/
 
@@ -23,12 +25,6 @@ void insertmatriks(int vertex)
             if(i != j){
                 printf("   vertex %d dan vertex %d   : ", i+1, j+1);
                 scanf("%d", &array[i][j]);
-                if(array[i][j] != 0){
-                    hubung = 1;
-                }
-                else{
-                    hubung = 0;
-                }
             }else{
                 array[i][j] = 0;
             }
@@ -192,18 +188,6 @@ void kruskal(int vertex){
  	printf("Total : %d", bobot);
 }
 
-void checkifconnected()
-{
-    if (hubung == 1)
-    {
-        printf("\nMatriks ini termasuk Graph Terhubung");
-    }
-    else
-    {
-        printf("\nMatriks ini termasuk Graph Tidak Terhubung");
-    }
-}
-
 int checkifcircuit(int array[50][50], int vertex)
 {
     int degreeIn = 0, degreeOut = 0, i,j, count;
@@ -237,6 +221,34 @@ int checkifcircuit(int array[50][50], int vertex)
        }
     }
     return 1;
+}
+
+void checkconnectedrecur(int startnumber){
+    int i;
+    for(i=1;i<=vertex;i++){
+        if(array[startnumber][i] == 1 && connect[i] != 1){
+            connect[i] == 1;
+            checkconnectedrecur(i);
+        }
+    }
+}
+
+int checkifconnected()
+{
+    int counter, i;
+    connect[1] == 1;
+    checkconnectedrecur(1);
+    for(i=1;i<=vertex;i++){
+        if(connect[i] == 1){
+            counter++;
+        }
+    }
+    if(counter == vertex){
+        return 1;
+    }
+    else{
+        return 0;
+    }
 }
 
 void header()
