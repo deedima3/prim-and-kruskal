@@ -7,6 +7,7 @@ void prim(int vertex);
 void kruskal(int vertex);
 int checkifcircuit(int array[50][50], int vertex);
 void checkifconnected();
+void printmatrix(int vertex);
 
 int array[50][50], hubung;
 
@@ -30,15 +31,6 @@ void insertmatriks(int vertex)
                 array[i][j] = 0;
             }
         }
-    }
-
-    printf("\n");
-    printf("Bentuk dalam matriks : \n");
-    for(int i=1; i<=vertex; i++){
-        for(int j=1; j<=vertex; j++){
-			printf("  %d", array[i][j]);
-        }
-	printf("\n");
     }
 }
 
@@ -225,6 +217,17 @@ void header()
     printf("PROGRAM ALGORIMA PRIM DAN KRUSKAL\n");
     printf("+++++++++++++++++++++++++++++++++\n");
 }
+
+void printmatrix(int vertex){
+    int i,j;
+
+    for(i=1;i<=vertex;i++){
+        for(j=1;j<=vertex;j++){
+            printf("[%d] ", array[i][j]);
+        }
+        printf("\n");
+    }
+}
 /* Utilities Function END*/
 
 
@@ -248,7 +251,9 @@ void main(){
             printf("\n\nMasukkan jumlah vertex     : ");
     	    scanf("%d", &vertex);
             insertmatriks(vertex);
+            printmatrix(vertex);
             checkifconnected();
+            getch();
             break;
         case 2:
             system("cls");
