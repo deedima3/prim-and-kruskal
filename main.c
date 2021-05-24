@@ -252,7 +252,9 @@ void main(){
             printf("\n\nMasukkan jumlah vertex     : ");
     	    scanf("%d", &vertex);
             insertmatriks(vertex);
+            printmatrix(vertex);
             checkifconnected();
+            getch();
             break;
         case 2:
             system("cls");
