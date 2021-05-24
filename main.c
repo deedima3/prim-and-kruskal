@@ -3,7 +3,7 @@
 
 void header();
 void insertmatriks(int vertex);
-void prim(vertex);
+void prim(int vertex);
 void kruskal(int vertex);
 int checkifcircuit(int array[50][50], int vertex);
 void checkifconnected();
@@ -42,7 +42,7 @@ void insertmatriks(int vertex)
     }
 }
 
-void prim(vertex){
+void prim(int vertex){
     int cost[50][50];
     int u,v,min_distance,distance[80],from[80];
     int visited[80],edges,min_cost,i,j,n;
@@ -85,7 +85,7 @@ void prim(vertex){
         edges--;
         visited[v] = 1;
 
-        for(i=1;i<n;i++){
+        for(i=1;i<vertex;i++){
             if(visited[i]==0&&cost[i][v]<distance[i])
             {
                 distance[i]=cost[i][v];
