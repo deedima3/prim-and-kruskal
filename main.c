@@ -31,15 +31,6 @@ void insertmatriks(int vertex)
             }
         }
     }
-
-    printf("\n");
-    printf("Bentuk dalam matriks : \n");
-    for(int i=1; i<=vertex; i++){
-        for(int j=1; j<=vertex; j++){
-			printf("  %d", array[i][j]);
-        }
-	printf("\n");
-    }
 }
 
 void prim(int vertex){
@@ -224,6 +215,19 @@ void header()
     printf("+++++++++++++++++++++++++++++++++\n");
     printf("PROGRAM ALGORIMA PRIM DAN KRUSKAL\n");
     printf("+++++++++++++++++++++++++++++++++\n");
+}
+
+void printmatrix(int vertex)
+{
+    int i, j;
+    for (i = 1; i <= vertex; i++)
+    {
+        for (j = 1; j <= vertex; j++)
+        {
+            printf("[%d] ", array[i][j]);
+        }
+        printf("\n");
+    }
 }
 /* Utilities Function END*/
 
