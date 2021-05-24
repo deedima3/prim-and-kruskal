@@ -7,7 +7,7 @@ int prim();
 void kruskal(int vertex);
 void spanningTree();
 int checkifcircuit(int array[50][50], int vertex);
-int checkifconnected(int startnumber);
+int checkifconnected();
 void checkifconnectedrecur(int startnumber);
 
 int array[50][50], hubung;
@@ -19,14 +19,21 @@ int connect[50];
 
 void insertmatriks(int vertex)
 {
+    int repeat[20][20];
     printf("Enter the adjacency matrix : \n");
     for(int i=0; i<vertex; i++){
         for(int j=0; j<vertex; j++){
-            if(i != j){
+            if(i == j){
+                continue;
+            }
+            if(i + j == repeat[j][i]){
+                continue;
+            }
+            else{
                 printf("   vertex %d dan vertex %d   : ", i+1, j+1);
                 scanf("%d", &array[i][j]);
-            }else{
-                array[i][j] = 0;
+                array[j][i] = array[i][j];
+                repeat[i][j] = i + j;
             }
         }
     }
@@ -87,6 +94,7 @@ int prim(){
         //insert the edge in spanning tree
         spanning[u][v]=distance[v];
         spanning[v][u]=distance[v];
+        printf("%d - %d = %d\n", u+1, v+1, distance[v]);
         no_of_edges--;
         visited[v]=1;
         
@@ -119,9 +127,9 @@ void kruskal(int vertex){
 	int awal, kecil=999, v=0;
  	int uji[vertex];
  	
- 	for(int i=1; i<=vertex; i++)
+ 	for(int i=0; i<vertex; i++)
  	{
-  		for(int j=i; j<=vertex; j++)
+  		for(int j=0; j<vertex; j++)
   		{
    			if(array[i][j]<kecil && array[i][j]!=0)
    			{
@@ -132,7 +140,7 @@ void kruskal(int vertex){
 	awal = kecil;
  
 	int batas=0, min=0, a, b, bobot=0;
- 	for(int i=1; i<=vertex; i++)
+ 	for(int i=0; i<vertex; i++)
  	{
   		uji[i] = 999;
  	}
@@ -143,11 +151,11 @@ void kruskal(int vertex){
  	while(1)
  	{
   		min = 999;
-  		for(int i=1; i<=vertex; i++)
+  		for(int i=0; i<vertex; i++)
   		{
   			if(uji[i] == i)
    			{
-    				for(int j=1; j<=vertex; j++)
+    				for(int j=0; j<vertex; j++)
     				{
      					if(array[i][j]<min && array[i][j]!=0)
      					{
@@ -162,7 +170,7 @@ void kruskal(int vertex){
   		array[b][a] = 0;
   
   		int sama = 0;
-  		for(int i=1; i<=vertex; i++)
+  		for(int i=0; i<vertex; i++)
   		{
    			if(uji[i]==b)
    			{
@@ -173,7 +181,7 @@ void kruskal(int vertex){
  
   		if (sama == 0)
   		{
-   			printf("%d - %d : %d\n",a,b,min);
+   			printf("%d - %d : %d\n",a+1,b+1,min);
    			bobot += min;
    			uji[b] = b;
    			v++;
@@ -222,8 +230,8 @@ int checkifcircuit(int array[50][50], int vertex)
 
 void checkconnectedrecur(int startnumber){
     int i;
-    for(i=1;i<=vertex;i++){
-        if(array[startnumber][i] == 1 && connect[i] != 1){
+    for(i=0;i<vertex;i++){
+        if(array[startnumber][i] != 0 && connect[i] != 1){
             connect[i] == 1;
             checkconnectedrecur(i);
         }
@@ -233,9 +241,9 @@ void checkconnectedrecur(int startnumber){
 int checkifconnected()
 {
     int counter, i;
-    connect[1] == 1;
-    checkconnectedrecur(1);
-    for(i=1;i<=vertex;i++){
+    connect[0] == 1;
+    checkconnectedrecur(0);
+    for(i=0;i<vertex;i++){
         if(connect[i] == 1){
             counter++;
         }
@@ -262,6 +270,7 @@ void header()
 void main(){
     int pilihan;
     int total_cost;
+    int checkConnect;
     while(1){
         system("cls");
         header();
@@ -278,14 +287,21 @@ void main(){
             printf("\n\nMasukkan jumlah vertex     : ");
     	    scanf("%d", &vertex);
             insertmatriks(vertex);
-            checkifconnected();
+	    checkConnect = checkifconnected();
+            if(checkConnect == 1){
+                printf("\n\nMatriks terhubung");
+            }
+            else{
+                printf("\n\nMatriks tidak terhubung");
+            }
             getch();
             break;
         case 2:
             system("cls");
             header();
+            printf("\n\n");
             total_cost = prim();
-            printf("\n\nspanning tree :\n\n");
+            printf("\nspanning tree :\n");
             spanningTree();
             printf("\n\nminimum spanning tree : %d", total_cost);
             getch();
