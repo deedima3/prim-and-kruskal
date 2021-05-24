@@ -45,7 +45,7 @@ void insertmatriks(int vertex)
 void prim(vertex){
     int cost[50][50];
     int u,v,min_distance,distance[80],from[80];
-    int visited[80],edges,min_cost,i,j;
+    int visited[80],edges,min_cost,i,j,n;
 
     for (i=0; i<vertex; i++){
         for(j=0; j<vertex ; j++){
@@ -101,7 +101,7 @@ void prim(vertex){
 
 void kruskal(int vertex){
 	int awal, kecil=999, v=0;
- 	int uji[vertex];
+ 	int uji[50];
  	
  	for(int i=1; i<=vertex; i++)
  	{
@@ -221,9 +221,9 @@ int checkifcircuit(int array[50][50], int vertex)
 
 void header()
 {
-    printf("+++++++++++++++++++++++++++++++++");
-    printf("PROGRAM ALGORIMA PRIM DAN KRUSKAL");
-    printf("+++++++++++++++++++++++++++++++++");
+    printf("+++++++++++++++++++++++++++++++++\n");
+    printf("PROGRAM ALGORIMA PRIM DAN KRUSKAL\n");
+    printf("+++++++++++++++++++++++++++++++++\n");
 }
 /* Utilities Function END*/
 
@@ -235,12 +235,12 @@ void main(){
     while(1){
         system("cls");
         header();
-        printf("1. Masukkan Matriks");
-        printf("2. Prim's Algorithm");
-        printf("3. Kruskal's Algoritm");
+        printf("1. Masukkan Matriks\n");
+        printf("2. Prim's Algorithm\n");
+        printf("3. Kruskal's Algoritm\n");
         printf("Masukkan pilihan yang anda inginkan:");
         scanf("%d", &pilihan);
-        switch (pilihan)
+        switch(pilihan)
         {
         case 1:
             system("cls");
@@ -248,7 +248,7 @@ void main(){
             printf("\n\nMasukkan jumlah vertex     : ");
     	    scanf("%d", &vertex);
             insertmatriks(vertex);
-            checkconnected();
+            checkifconnected();
             break;
         case 2:
             system("cls");
