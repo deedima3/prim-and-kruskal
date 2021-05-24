@@ -3,7 +3,7 @@
 
 void header();
 void insertmatriks(int vertex);
-void prim();
+void prim(vertex);
 void kruskal(int vertex);
 int checkifcircuit(int array[50][50], int vertex);
 void checkifconnected();
@@ -41,6 +41,63 @@ void insertmatriks(int vertex)
 	printf("\n");
     }
 }
+
+void prim(vertex){
+    int cost[50][50];
+    int u,v,min_distance,distance[80],from[80];
+    int visited[80],edges,min_cost,i,j;
+
+    for (i=0; i<vertex; i++){
+        for(j=0; j<vertex ; j++){
+            if(array[i][j] == 0){
+                cost[i][j] = 999;
+            }
+            else{
+                cost[i][j] = array[i][j];
+            }
+        }
+    }
+
+    distance[0] = 0;
+    visited[0] = 1;
+
+    for(i=1; i<vertex; i++){
+        distance[i] = cost[0][i];
+        from[i] = 0;
+        visited[i] = 0;
+    }
+
+    min_cost = 0;
+    edges = vertex - 1; 
+
+    while(edges > 0){
+        min_distance = 999;
+        for(i=0; i<vertex; i++){
+            if(visited[i]==0 && distance[i]<min_distance)
+            {
+                v=i;
+                min_distance = distance[i];
+            }
+        }
+
+        u = from[v];
+
+        edges--;
+        visited[v] = 1;
+
+        for(i=1;i<n;i++){
+            if(visited[i]==0&&cost[i][v]<distance[i])
+            {
+                distance[i]=cost[i][v];
+                from[i]=v;
+            }
+        }
+
+        min_cost = min_cost + cost[u][v];    
+    }
+
+    printf("\n\nminimum spanning tree : %d", min_cost);
+}	
 
 void kruskal(int vertex){
 	int awal, kecil=999, v=0;
@@ -196,7 +253,7 @@ void main(){
         case 2:
             system("cls");
             header();
-            prim();
+            prim(vertex);
             break;
         case 3:
             system("cls");
