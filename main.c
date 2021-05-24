@@ -4,7 +4,7 @@
 void header();
 void insertmatriks();
 int prim();
-void kruskal();
+void kruskal(int vertex);
 void spanningTree();
 int checkifcircuit(int array[50][50], int vertex);
 void checkifconnected();
@@ -119,7 +119,7 @@ void spanningTree(){
     }
 }
 
-void kruskal(){
+void kruskal(int vertex){
 	int awal, kecil=999, v=0;
  	int uji[vertex];
  	
@@ -271,7 +271,6 @@ void main(){
             insertmatriks();
             checkifconnected();
             getch();
-            main();
             break;
         case 2:
             system("cls");
@@ -281,14 +280,12 @@ void main(){
             spanningTree();
             printf("\n\nminimum spanning tree : %d", total_cost);
             getch();
-            main();
             break;
         case 3:
             system("cls");
             header();
-            kruskal();
+            kruskal(vertex);
             getch();
-            main();
             break;
         default:
             printf("Maaf pilihan yang anda masukkan salah");
