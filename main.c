@@ -214,9 +214,6 @@ int checkifcircuit(int array[50][50], int vertex)
     for(i=0;i<vertex;i++){
        temp = arrayDegreeIn[i] - arrayDegreeOut[i];
        if(temp != 0){
-           countercircuit++;
-       }
-       if(countercircuit > 2){
            return 0;
        }
     }
