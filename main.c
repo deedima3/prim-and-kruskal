@@ -260,14 +260,17 @@ void main(){
             system("cls");
             header();
             prim(vertex);
+            getch();
             break;
         case 3:
             system("cls");
             header();
             kruskal(vertex);
+            getch();
             break;
         default:
             printf("Maaf pilihan yang anda masukkan salah");
+            getch();
             break;
         }
     }
