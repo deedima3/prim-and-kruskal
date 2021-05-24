@@ -15,7 +15,7 @@ int spanning[50][50];
 
 /* Utilities Function START*/
 
-void insertmatriks()
+void insertmatriks(int vertex)
 {
     printf("Enter the adjacency matrix : \n");
     for(int i=0; i<vertex; i++){
@@ -268,7 +268,7 @@ void main(){
             header();
             printf("\n\nMasukkan jumlah vertex     : ");
     	    scanf("%d", &vertex);
-            insertmatriks();
+            insertmatriks(vertex);
             checkifconnected();
             getch();
             break;
