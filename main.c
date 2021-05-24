@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 void header();
-void insertmatriks();
+void insertmatriks(int vertex);
 int prim();
 void kruskal(int vertex);
 void spanningTree();
